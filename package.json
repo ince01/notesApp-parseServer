@@ -1,14 +1,11 @@
 {
-  "name": "parse-server-app",
+  "name": "notesApp-parseServer",
   "version": "1.0.0",
-  "description": "",
+  "description": "A Notes App using parse-server & parse-dashboard",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
