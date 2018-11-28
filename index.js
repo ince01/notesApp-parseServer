@@ -3,7 +3,7 @@ var bodyParser = require('body-parser');
 var ParseServer = require('parse-server').ParseServer;
 var ParseDashboard = require('parse-dashboard');
 
-var databaseUri = 'mongodb://ince:01626149819Tt_@ds119164.mlab.com:19164/notes-app';
+var databaseUri = 'mongodb://admin:admin123@ds119164.mlab.com:19164/notes-app';
 
 if (!databaseUri) {
   console.log('DATABASE_URI not specified, falling back to localhost.');
