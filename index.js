@@ -3,7 +3,7 @@ var bodyParser = require('body-parser');
 var ParseServer = require('parse-server').ParseServer;
 var ParseDashboard = require('parse-dashboard');
 
-var databaseUri = 'mongodb://localhost:27017/notes-app';
+var databaseUri = 'mongodb://ince:01626149819Tt_@ds119164.mlab.com:19164/notes-app';
 
 if (!databaseUri) {
   console.log('DATABASE_URI not specified, falling back to localhost.');
@@ -14,23 +14,24 @@ var api = new ParseServer({
   cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
   appId: process.env.APP_ID || 'notesApp',
   masterKey: process.env.MASTER_KEY || '123',
-  serverURL: process.env.SERVER_URL || 'http://localhost:1337/parse',
+  serverURL: process.env.SERVER_URL || 'http://localhost:3000/parse',
   liveQuery: {
     classNames: ["Posts", "Comments"]
   }
 });
 
 var options = { allowInsecureHTTP: false };
-
+var trustProxy = true;
 var dashboard = new ParseDashboard({
   "apps": [
     {
-      "serverURL": "http://localhost:1337/parse",
+      "serverURL": "http://localhost:3000/parse",
       "appId": "notesApp",
       "masterKey": "123",
       "appName": "Notes App"
     }
-  ]
+  ],
+  "trustProxy": 1
 }, options);
 
 var app = express();
@@ -47,7 +48,7 @@ app.get('/', function (req, res) {
   res.status(200).send('I dream of being a website.');
 });
 
-var port = process.env.PORT || 1337;
+var port = process.env.PORT || 3000;
 var httpServer = require('http').createServer(app);
 httpServer.listen(port, function () {
   console.log('parse-server-example running on port ' + port + '.');
