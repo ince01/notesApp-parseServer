@@ -31,7 +31,14 @@ var dashboard = new ParseDashboard({
       "appName": "Notes App"
     }
   ],
-  "trustProxy": 1
+  "trustProxy": 1,
+  "users": [
+    {
+      "user": "admin",
+      "pass": "$2y$12$XyFlQNEODAsyBloL80SsgOK0IT9kz6rsEIyF6IX9qi0lRNXpzss76"
+    }
+  ],
+  "useEncryptedPasswords": true
 }, options);
 
 var app = express();
