@@ -10,6 +10,7 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "parse-dashboard": "^1.2.0",
-    "parse-server": "^3.1.1"
+    "parse-server": "^3.1.1",
+    "parse-server-generic-email-adapter": "0.0.4"
   }
 }

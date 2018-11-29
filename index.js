@@ -17,11 +17,39 @@ var api = new ParseServer({
   serverURL: process.env.SERVER_URL || 'http://localhost:3000/parse',
   liveQuery: {
     classNames: ["Posts", "Comments"]
+  },
+  verbose: true,
+  
+  verifyUserEmails: true,
+
+  emailVerifyTokenValidityDuration: 2 * 60 * 60,
+  preventLoginWithUnverifiedEmail: true,
+
+  publicServerURL: 'http://localhost:3000/parse',
+  appName: 'Notes App',
+  emailAdapter: {
+    module: '@Notes App/simple-mailgun-adapter',
+    options: {
+      fromAddress: 'no-reply@notesappp.xyz',
+      domain: 'sandbox8a3dc39562e147adbe440f1a6450f7b4.mailgun.org',
+      apiKey: '537012b22b31e3da06882adefcd46863-059e099e-7a104fbc',
+    }
+  },
+
+  accountLockout: {
+    duration: 5,
+    threshold: 3,
+  },
+  passwordPolicy: {
+    validatorPattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/,
+    doNotAllowUsername: true,
+    maxPasswordAge: 90,
+    maxPasswordHistory: 5,
+    resetTokenValidityDuration: 24 * 60 * 60,
   }
 });
 
 var options = { allowInsecureHTTP: false };
-var trustProxy = true;
 var dashboard = new ParseDashboard({
   "apps": [
     {
@@ -55,10 +83,15 @@ app.get('/', function (req, res) {
   res.status(200).send('I dream of being a website.');
 });
 
-var port = process.env.PORT || 3000;
-var httpServer = require('http').createServer(app);
-httpServer.listen(port, function () {
-  console.log('parse-server-example running on port ' + port + '.');
+app.set('port', process.env.PORT || 3000);
+app.listen(app.get('port'), function () {
+  console.log(`Notes App running on port ${app.get('port')}...`);
 });
 
-ParseServer.createLiveQueryServer(httpServer);
+// var port = process.env.PORT || 3000;
+// var httpServer = require('http').createServer(app);
+// httpServer.listen(port, function () {
+//   console.log('parse-server-example running on port ' + port + '.');
+// });
+
+ParseServer.createLiveQueryServer(app);
