@@ -28,9 +28,9 @@ var api = new ParseServer({
   publicServerURL: 'http://localhost:3000/parse',
   appName: 'Notes App',
   emailAdapter: {
-    module: '@Notes App/simple-mailgun-adapter',
+    module: '@parse/simple-mailgun-adapter',
     options: {
-      fromAddress: 'no-reply@notesappp.xyz',
+      fromAddress: 'parse@example.com',
       domain: 'sandbox8a3dc39562e147adbe440f1a6450f7b4.mailgun.org',
       apiKey: '537012b22b31e3da06882adefcd46863-059e099e-7a104fbc',
     }
@@ -46,7 +46,9 @@ var api = new ParseServer({
     maxPasswordAge: 90,
     maxPasswordHistory: 5,
     resetTokenValidityDuration: 24 * 60 * 60,
-  }
+  },
+
+  
 });
 
 var options = { allowInsecureHTTP: false };
